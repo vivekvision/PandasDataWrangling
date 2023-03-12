@@ -57,8 +57,12 @@ Reading pipe separated file
 df = pd.read_csv('./data.txt',  sep='|' , engine = 'python')
 
 
+# Read Excel File into Pandas dataframe
 
-Numpy array to Pandas dataframe
+
+
+
+# Numpy array to Pandas dataframe
 
 import numpy as np
 import pandas as pd

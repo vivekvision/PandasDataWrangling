@@ -1,3 +1,4 @@
+# Introduction
 Pandas is short/ acronym for Panel Data Structure 
 
 import pandas as pd
@@ -26,7 +27,7 @@ Binary files - Optimize I/O Performance
 Relational database - SQL Query 
 
 
-Reading CSV in Dataframe 
+# Reading CSV file into Pandas Dataframe 
 
 import pandas as pd 
 
@@ -68,19 +69,19 @@ print(df)
 print(type(df))
 
 
-Selecting rows & columns in dataframe
+# Selecting Rows & Columns in dataframe
 
 .iloc   -   selects rows & columns by numbers only  (0-based numbers)
 .loc    -   selects rows & columns by label
 
 
-# select all rows and only last column
+#select all rows and only last column
 df.iloc[ : , -1] 
 
-# select all rows and all columns excluding last column
+#select all rows and all columns excluding last column
 df.iloc[ : , : -1] 
 
-# select all rows and 2nd column
+#select all rows and 2nd column
 
 df.iloc[ : , 1] 
 
@@ -103,7 +104,7 @@ df.iloc[ : , 1]
 
 
 
-Filter on Pandas Data-frame 
+# Filter on Pandas Data-frame 
 
 df = df.loc[<condition>]
 
@@ -131,14 +132,14 @@ Select only columns ‘Col1’, ‘Col2’ and ‘Col3’ (Discard all other col
 df = df[[‘Col1’,’Col2’,’Col3’]]
 
 
-New Column as Sum of two other column values 
+# New Column as Sum of two other column values 
 
 df[‘NewColumn’] = df[‘Col1’] + df[‘Col2’]
 
 
 
 
-Select unique values of a column 
+# Select unique values of a column 
 
 df[‘Col1’].unique()
 

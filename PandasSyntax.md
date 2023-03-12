@@ -155,8 +155,9 @@ Default type of join is ‘inner’
 
 df = pd.merge(df1, df2, on=[‘Key’], how =’left’)
 
-PS- column Key is present in both data frame and common data type 
-Join on two Columns 
+column Key should be present in both data-frame and should be common data-type 
+ 
+# Join on two Columns 
 
 df = pd.merge(A_df, B_df, how=’left’,  left_on = [‘A_c1’, ’A_c2’], right_on = [‘B_c1’, ’B_c2’])
 
@@ -189,6 +190,7 @@ df['identifier1'] = df.apply(lambda x: '_'.join(sorted([x.Make, x.Model, x.Origi
 
 
 { } results in set
+ 
 [ ]  results in list 
 
 
@@ -231,6 +233,7 @@ print(df2)
 df2 = df.applymap(lambda a: str(a)+".00")
 print(df2)
 
+
 # Use  map() Method on series/ a column of dataframe 
 df["Col 1"]=df["Col 1"].map(lambda x: x/100)
 print(df)
@@ -264,12 +267,12 @@ df.columns = df.columns.str.lower()
 
 # Rename Column
 
-df.rename(columns = {‘OldColName’ : ’NewColName’}, inplace=True)
+df.rename(columns = {'OldColName' : 'NewColName'}, inplace=True)
 
 
 # Renaming multiple columns:
 
-df.rename(columns= {‘OldCol1Name’ : ‘NewCol1Name’, ‘OldCol2Name’:’NewCol2Name’}, inplace=True)
+df.rename(columns= {'OldCol1Name' : 'NewCol1Name', 'OldCol2Name': 'NewCol2Name'}, inplace=True)
 
 
 # Remove space from a Column value
@@ -278,7 +281,8 @@ df1['employee_id'] = df1['employee_id'].str.replace(" ","" ,regex=True)
 
 df['Invoice'] = df['Invoice'].str.replace(r'$', r'', regex=True)
 
-# Remove leading & trailing space from a Column value
+ 
+# Remove leading and trailing space from a Column value
 
 df1['State'] = df1['State'].str.strip()
 
@@ -301,7 +305,7 @@ df[‘col1’] = df[‘col1’].replace(np.nan, 0)
 
 df  = df.set_index(‘Col1’)
 
-# Revert back
+#revert back
 df = df.reset_index()
 
 
@@ -343,11 +347,13 @@ Following is equivalent to above:
 
 df.dropna(subset=['col1'], axis = 0, inplace = True)
 
+
 # Drop columns with NA
 
 df = df.dropna(axis=1) 
 
 axis = 1 represents columns 
+
 
 # Remove/Drop a column 
 
@@ -369,6 +375,7 @@ Group by column1, column2 & column3 and take aggregate of ColumnAmount by applyi
 df = df.groupby([‘column1’, ’column2’, ’column3’], as_index=False).agg({‘ColumnAmount’:’sum’})
 
 
+
 # Multiple column aggregates 
 
 df = df.groupby([‘column1’,’column2’,’column3’], as_index=False).agg({‘ColumnAmount1’:’sum’, ‘ColumnAmount2’:’sum’, ’ColumnAmount3’:’mean’})
@@ -388,15 +395,14 @@ abs(df[‘col1’])
 # Stack two data-frame
 
 
-Stack data-frame df1 and data-frame df2
-
-
-import pandas as pd
+#Stack data-frame df1 and data-frame df2
 df = pd.concat([df1, df2], axis=0, ignore_index=True, sort=False)
 
-Note: Ensure all columns are matching, data type for each column must have matching data type to avoid mess up in concat()
+#Befor concat fucntion call, ensure all column names are matching, each column must have matching data-type
+#matching column names and column data-type is essential to avoid mess up in concat() function
 
-If else conditional on Column value 
+
+# If else conditional on Column value 
 
 Numpy function where and select can be used with pandas data-frame to perform data wrangling involving one or more conditions on column values
 
@@ -412,9 +418,9 @@ df[‘ColumnNew’] = np.where(condition1, trueResult, falseResult)
 
 where function can be nested 
 
-Multiple Condition 
+# Multiple Condition if else 
 
-Create or modify a column based on multiple conditions involving other columns 
+#Create or modify a column based on multiple conditions involving other columns 
 
 # Put all conditions into list 
 Conditions = [ (df[‘col1’]==”T1”), (df[‘col2’] > df[‘col3’]), (df[‘col4’]==”T3”) ]
@@ -426,42 +432,41 @@ Results = [ (“R1”), (df[‘col5’]), (df[‘col6’]) ]
 df[‘ColumnNew’] = np.select(Conditions, Results, default=””)
 
 
-Lookup from data-frame
+# Lookup from data-frame
 
-Data-frame df1 has two columns ‘ColumnKey’ & ‘ColumnValue’
-Data-frame df2 has the primary data with a column ‘ColKey’
+#Data-frame df1 has two columns ‘ColumnKey’ & ‘ColumnValue’
+#Data-frame df2 has the primary data with a column ‘ColKey’
 
-Use case: Lookup & populate a new column named ‘ColVal’ in data-frame df2 from data-frame df1
+#Use case: Lookup & populate a new column named ‘ColVal’ in data-frame df2 from data-frame df1
 
-First step: create a dictionary from data-frame df1 
+#First step: create a dictionary from data-frame df1 
 
 df1_dict = df1.set_index(‘ColumnKey’)[‘ColumnValue’].to_dict()
 
 
-Second step: lookup from dictionary 
+#Second step: lookup from dictionary 
 
 df2[‘ColVal’] = df1[‘ColKey’].map(df1_dict)
 
 
-Ignore Pandas warnings 
+# Ignore Pandas warnings 
 
 import warnings
 warnings.filterwarnings(“ignore”)
 
 
 
-Logging the messages 
+# Logging the messages 
 
 
-
-Basic logging 
+# Basic logging 
 
 import logging
 logging.basicConfig(level=logging.INFO)
 logging.info('Hello World')
 
 
-File logging 
+# File logging 
 
 # importing module
 import logging
@@ -471,13 +476,13 @@ logging.basicConfig(filename="newfile.log",
                     format='%(asctime)s %(message)s',
                     filemode='w')
  
-# Creating an object
+#Creating an object
 logger = logging.getLogger()
  
-# Setting the threshold of logger to DEBUG
+#Setting the threshold of logger to DEBUG
 logger.setLevel(logging.DEBUG)
  
-# Test messages
+#Test messages
 logger.debug("Harmless debug Message")
 logger.info("Just an information")
 logger.warning("Its a Warning")
@@ -485,7 +490,7 @@ logger.error("Did you try to divide by zero")
 logger.critical("Internet is down")
 
 
-Remove space/special character from column names
+# Remove space/special character from column names
 
 df.columns = df.columns.str.replace(“ “,””)
 df.columns = df.columns.str.replace(“)”,””)
@@ -494,7 +499,7 @@ df.columns = df.columns.str.replace(“_”,””)
 df.columns = df.columns.str.replace(“-”,””)
 
 
-Line break within a python code line 
+# Line break within a python code line 
 
 
 Special char ‘\’ can be used to introduce line break within a python code line 
@@ -510,22 +515,21 @@ df = pd.merge(df1, df2, how=’left’, left_on=[‘x1’], \
                                                        right_on = [‘x2’])
 
 
-Null check on column value 
-Null check on column 
-
+# Null check on column value 
+#Null check on column
 df[‘Col1’].isnull()
 
 
-Filter out all null values of ‘Col1’
+# Filter out all null values of ‘Col1’
 
 df = df.loc[~df[‘Col1’].isnull()]
 
 
 
 
-Case statement/ Case when structure 
+# Case statement/ Case when structure 
 
-Create or Modify a column based on multiple conditions involving other columns 
+#Create or Modify a column based on multiple conditions involving other columns 
 
 #put all conditions in a list 
 Conditions = [(df[‘col1’]==”T1”), (df[‘col2’] > df[‘col3’]), (df[‘col4’]==”T3”)]
@@ -537,27 +541,29 @@ Results = [(“R1”), (df[‘col5’]), (df[‘col6’])]
 df[‘ColumnNew’]  = np.select(Conditions, Results, default=””)
 
  
-Replace NaN with zero or empty 
+# Replace NaN with zero or empty 
 
 import numpy as np
 
-Change NaN to zero only for numeric columns 
+#Change NaN to zero only for numeric columns 
 
-For one column
+#For one column
 df[‘col1’] = df[‘col1’].replace(np.nan, 0)
 
-For whole data-frame
+#For whole data-frame
 df = df.replace(np.nan, 0)
-Replace NaN with empty string 
+#Replace NaN with empty string 
 
-For one column
-df[‘col1’] = df[‘col1’].replace(np.nan,””)
+#For one column
+df[‘col1’] = df[‘col1’].replace(np.nan, "")
 
-For whole data-frame 
-df = df.replace(np.nan, “”)
+#For whole data-frame 
+df = df.replace(np.nan,"")
 
 
-Pivot & Melt/Unpivot
+# Pivot & Melt/Unpivot in Pandas data-frame
+ 
+
 
 Grouping & aggregation 
 df = df.groupby([‘Col1’, ’Col2’, ’Col3’, ’Account’]).agg({‘Amount’:’sum’})
@@ -580,27 +586,28 @@ Name, Course, Age
 “John”, “Masters”, 27
 “Bob”, “Graduate”, 23
 
-# Name is id_vars and course is value_vars
+#Name is id_vars and course is value_vars
 df = pd.melt(df, id_vars=[‘Name’], value_vars=[‘Course’])
 
-# Multiple columns can be included in id_vars
+#Multiple columns can be included in id_vars
 df = pd.melt(df, id_vars=[‘Name’,’Age’], value_vars=[‘Course’])
 
-Compare float with Zero
+ 
+# Compare float with Zero
 
 np.isclose(df[‘col1’], 0.0)
 
-Check for zero value while performing division 
+#Check for zero value while performing division 
 df[‘div’] = np.where( (np.isclose(df[‘col1’], 0.0)), np.nan, (df[‘col1’]/df[‘col2’]) )
 
 
-Converting to float dealing with empty column value
+# Converting to float dealing with empty column value
 
 df[‘col1’]  = df[‘col1’].replace(“”, np.nan).astype(float).fillna(0.0)
 
 
 
-Converting to float dealing with comma in column value
+# Converting to float dealing with comma in column value
 
 df[‘col1’]  = df[‘col1’].str.replace(r’,’ , r’’ , regex=True)
 
@@ -622,29 +629,29 @@ df[‘col1’].isna() returns False if value is present  True if NA
 
 
 
-Front Filling 
+# Front Filling 
 
 df[‘col1’]  = df[‘col1’].fillna(method = “ffill”)
 
 
-Back Filling
+# Back Filling
 
 df[‘col1’]  = df[‘col1’].fillna(method = “bfill”)
 
-Average value filling
+# Average value filling
 
 df[‘col1’]  = df[‘col1’].fillna(value = df[‘col1’].mean())
 
 
 
 
-String Concatenation 
+# String Concatenation 
 
 
 X = “hello” + “world” 
 
 
-Substring on Column 
+# Substring on Column 
 
 df['col'] = df['col'].str[:9]
 
@@ -652,12 +659,12 @@ df['col'] = df['col'].str[:9]
 df['col'] = df['col'].str.slice(0, 9)
 
 
-Column names to lowercase 
+# Column names to lowercase 
 
 
 df.columns  = df.columns.str.lower()
 
-Creating Dataframe in code 
+# Creating Dataframe in code 
 
 import pandas as pd
 
@@ -672,41 +679,41 @@ df = pd.DataFrame(data)
 
 
 
-Create empty Dataframe with column names 
+# Create empty Data-frame with column names 
 
   
 data = {'Name': [], 'Age': []}  
   
-# Create DataFrame  
+#Create DataFrame  
 df = pd.DataFrame(data)  
   
 
-# add rows to empty data-frame
+#add rows to empty data-frame
 df = df.append({‘Name’: “xyz”, ‘Age’: 23})
-Delete Columns
+#Delete Columns
 
 df.drop([‘col1’,’col2’,’col3’], axis=1, inplace=True)
 # original df object changed when inplace=True 
 
 
 
-Delete Dataframe
+# Delete Dataframe
 
 del df
 
 
 
-If else expression 
+# If else expression 
 
 
 Value_1 if condition else value_2
 
-PS- do not use with pandas column, instead use np.where()
+#Do not use with pandas column, instead use np.where()
 
 
-Datatype
+# Datatype
 
-Imported data - often wrong data type is assigned to columns - must check & correct 
+#Imported data - often wrong data type is assigned to columns - must check & correct 
 
 int64
 float64
@@ -715,20 +722,20 @@ object  - string or text
 float and object type in dataframe can contain null values 
 
 
-# display datatype of all columns 
+#display datatype of all columns 
 df.dtypes 
 
 
-# display datatype of one column ‘col1’
+#display datatype of one column ‘col1’
 dataframe.col1.dtype
 
 
-Convert entire data-frame to string type 
+# Convert entire data-frame to string type 
 
 df = df.astype(‘str’)
 
 
-Convert Column data-type 
+# Convert Column data-type 
 
 df[‘col1’]  = df[‘col1’].astype(‘float’)
 
@@ -738,15 +745,12 @@ df[‘col3’]  = df[‘col3’].astype(‘str’)
 
 
 
-Convert data-type of multiple columns
+# Convert data-type of multiple columns
 
 df [[‘col1’, ‘col2’, ‘col3’]] = df [[‘col1’, ‘col2’, ‘col3’]].astype(‘str’)
 
 
-
-
-
-Convert to Date
+# Convert to Date
 
 df[‘col2’] = pd.to_datetime(df[‘col2’])
 
@@ -755,14 +759,14 @@ df['just_date'] = df['dates'].dt.date
 
 df['dateTypeValue'] = pd.to_datetime(df['yyyymmddString'], format='%Y%m%d')
 
-Size/ Row count 
+# Size/ Row count 
 
 
 len(df.index)
 df.shape[0]
 
 
-Differencing with previous values
+# Differencing with previous values
 
 
 df['diff_1'] = df['Passengers'].diff(periods=1)
@@ -770,20 +774,20 @@ df['diff_2'] = df['Passengers'].diff(periods=2)
 
 
 
-Ignore warnings
+# Ignore warnings
 
 import warnings
 warnings.filterwarnings(‘ignore’)
 
 
-Sampling 
+# Sampling 
 
 
 df_sample = df.sample(n=60, replace=True)
 
 
 
-Cumulative sum : Cumsum 
+# Cumulative sum : Cumsum 
 
 
 s = pd.Series([3, np.nan, 4, -5, 0])
@@ -818,7 +822,7 @@ By default, NA values are ignored
 
 
 
-Sort by a column
+# Sort by a column
 df = df.sort_values(‘date’)
 
 df = df.sort_values(by=’date’, ascending=True)
@@ -828,7 +832,7 @@ df = df.sort_values(by=’date’, ascending=True)
 
  
 
-Regular expressions 
+# Regular expressions 
 
 Check valid regex online 
 https://regex101.com/r/2EaKua/1
@@ -842,7 +846,7 @@ https://regex101.com/r/2EaKua/1
 
 
 
-Debugging Tips 
+# Debugging Tips 
 
 #Display column schema 
 df.info()
@@ -861,12 +865,12 @@ x = df.columns.values
 x.sort()
 x
 
-Difference of two list 
+# Difference of two list 
 
 list(set(df1.columns.values) - set(df2.schema.names))
 
 
-Check datatype of column
+# Check datatype of column
 
 Display datatype of one column
 
@@ -880,17 +884,17 @@ dataframe.dtypes
 
 
 
-Get all Columns of Dataframe in  List
+# Get all Columns of Dataframe in  List
 
 columnNames = df.columns.tolist()
 
 
-Display type of object
+# Display type of object
 
 type(obj)
 
 
-Sort list elements
+# Sort list elements
 
 list.sort() - sorts the original list / modifies the order of elements in the list 
 list.sort(reverse=True) - to sort elements from higher to lower 
@@ -918,7 +922,7 @@ random = [(2, 2), (3, 4), (4, 1), (1, 3)]
 # sort list with key
 sorted_list = sorted(random, key=lambda x: x[1])
 
-
+# axis in pandas data-frame
 axis=0 represents row 
 axis =1 represents columns 
 

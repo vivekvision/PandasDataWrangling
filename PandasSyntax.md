@@ -8,7 +8,9 @@ Import numpy as np
 Following are used heavily in Pandas
 
 np.array 
-np.ndarray    -> nd means n dimensional -> which mean it can have arbitrary number of                                                                                  dimension 
+np.ndarray    
+
+nd means n dimensional - it can have arbitrary number of dimension
 
 
 Two fundamental pandas type

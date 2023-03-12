@@ -59,7 +59,13 @@ df = pd.read_csv('./data.txt',  sep='|' , engine = 'python')
 
 # Read Excel File into Pandas dataframe
 
+df = pd.read_excel("./fileName.xlsx")
 
+#read a specific sheet
+
+
+#read mulit-header & multi-index excel
+df = pd.read_excel("./fileName.xlsx", header = [0,1,2,3,4,5,6], index_col=[0,1])
 
 
 # Numpy array to Pandas dataframe

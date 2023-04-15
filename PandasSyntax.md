@@ -118,7 +118,6 @@ df = df.loc[df[‘Col1’]==”constant1”]
 df = df.loc[~( (df[‘Col1’] ==”Const1”) & (df[‘Col2’]==”Const2”) )]
 
 
-
 # Select only Specific Columns
 
 Select only columns ‘Col1’, ‘Col2’ and ‘Col3’ (Discard all other columns)
@@ -861,13 +860,17 @@ df.columns.values
 float_columns = df.select_dtypes(include=[‘float’]).columns
 
 
+# Sort list
+
 x = df.columns.values
 x.sort()
 x
 
+
 # Difference of two list 
 
 list(set(df1.columns.values) - set(df2.schema.names))
+
 
 
 # Check datatype of column

@@ -1,3 +1,3 @@
 # PandasDataWrangling
 
-Illustration & Design Patterns to demonstrate correct usage of Pandas 
+Illustrations to demonstrate correct usage of Pandas 
